@@ -4,12 +4,29 @@
   "description": "vite测试",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "applications/basicSOP/**/*.{js,ts,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "applications/basicSOP/**/*.{json,md,css,scss,html}": [
+      "prettier --write"
+    ],
+    "applications/vite7demo/**/*.{js,ts}": [
+      "echo '暂时不校验 vite7demo'"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.5",
     "vite": "8.0.10"
   }
 }
