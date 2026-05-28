@@ -3,5 +3,5 @@ import {createApp} from "vue";
 
 createApp(App).mount("#app")
 
-const a:string=1
+// const a:string=1
 console.log(123)
