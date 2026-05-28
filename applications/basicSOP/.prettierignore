@@ -1,0 +1,8 @@
+# 构建输出和依赖
+node_modules
+dist
+build
+
+# 生成的文件
+*.min.js
+*.bundle.js
