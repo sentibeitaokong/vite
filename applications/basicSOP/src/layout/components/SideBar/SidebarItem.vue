@@ -90,16 +90,19 @@ const hasOneShowingChild = (children: RouteRecordRaw[] = [], parent: RouteRecord
  * 🌟 核心：路径解析器
  * 因为 Vite 中不能直接用 Node.js 的 path 模块，所以我们手写一个路径拼接函数
  */
+/**
+ * 优化后的路径解析器：处理多重斜杠并保证路径格式统一
+ */
 const resolvePath = (routePath: string) => {
-  // 如果子路由自身是一个绝对路径（或者是 http 外部链接），直接返回
   if (/^(https?:|mailto:|tel:)/.test(routePath) || routePath.startsWith('/')) {
     return routePath
   }
-  // 否则，将父级的 basePath 和当前路由的 path 拼接起来
-  if (props.basePath.endsWith('/')) {
-    return props.basePath + routePath
-  }
-  return props.basePath + '/' + routePath
+
+  // 拼接路径
+  const path = props.basePath + '/' + routePath
+
+  // 核心：使用正则移除重复的斜杠（例如 // 变成 /），并确保不以 / 结尾（除了根目录）
+  return path.replace(/\/+/g, '/').replace(/\/$/, '') || '/'
 }
 </script>
 

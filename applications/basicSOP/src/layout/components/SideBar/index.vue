@@ -4,6 +4,7 @@
 
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
+        v-if="permissionStore.routes.length > 0"
         :default-active="activeMenu"
         :collapse="isCollapse"
         :unique-opened="false"

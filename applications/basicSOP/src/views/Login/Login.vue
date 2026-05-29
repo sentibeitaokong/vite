@@ -52,14 +52,13 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { User, Lock } from '@element-plus/icons-vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { useUserStore } from '@/store/user'
 // import { login } from '@/api/user' // 假设你封装了 login 接口
 
 const router = useRouter()
-const route = useRoute()
 
 // 表单实例引用
 const loginFormRef = ref<FormInstance>()
@@ -110,17 +109,8 @@ const handleLogin = async () => {
         localStorage.setItem('ACCESS_TOKEN', token)
         const userStore = useUserStore()
         userStore.setToken(token)
-        userStore.getInfo()
         ElMessage.success('登录成功，欢迎回来！')
-
-        // 3. 核心路由重定向逻辑
-        // 读取 URL 中是否带有被拦截前想去的地址 (即我们之前在 router.beforeEach 中拼接的 ?redirect=xxx)
-        const redirect = route.query.redirect as string
-        if (redirect) {
-          router.replace(redirect) // 使用 replace 防止用户点浏览器的返回键又回到登录页
-        } else {
-          router.replace('/') // 默认回首页
-        }
+        router.push('/')
       } catch (error: any) {
         // 网络或密码错误，已经在 Axios 拦截器中抛出并提示过了，这里只需取消 Loading
         console.error('登录异常:', error)
