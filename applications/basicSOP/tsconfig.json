@@ -1,40 +1,49 @@
 {
   "compilerOptions": {
     //基础配置
-    "target": "ES2020",   //指定输出的 JavaScript 版本
-    "lib": ["ESNext","DOM"],  //定义 TypeScript 编译时可用的环境类型库
-    "module": "ESNext",      //指定代码的模块系统
+    "target": "ES2020", //指定输出的 JavaScript 版本
+    "lib": ["ESNext", "DOM"], //定义 TypeScript 编译时可用的环境类型库
+    "module": "ESNext", //指定代码的模块系统
     "moduleResolution": "bundler", //模块解析策略需与模块系统匹配。对于使用 Vite 的现代前端项目，推荐 "bundler"
 
     //严格类型检查
-    "strict": true,    //核心理念是宁可让构建失败，也不让潜在 Bug 进入生产环境
-    "noImplicitOverride": true,  //在子类的方法上，如果意图是重写父类方法，必须显式使用 override 关键字
+    "strict": true, //核心理念是宁可让构建失败，也不让潜在 Bug 进入生产环境
+    "noImplicitOverride": true, //在子类的方法上，如果意图是重写父类方法，必须显式使用 override 关键字
 
     //工程化与代码质量
     "forceConsistentCasingInFileNames": true, //杜绝因操作系统文件名大小写不敏感而导致的跨平台“灵异问题”
-    "noUnusedLocals": true,   //能够有效清理死代码，避免局部变量堆积
-    "noUnusedParameters": true,  //有助于保持函数签名清晰，特别适合重构场景
+    "noUnusedLocals": true, //能够有效清理死代码，避免局部变量堆积
+    "noUnusedParameters": true, //有助于保持函数签名清晰，特别适合重构场景
 
     //性能与构建优化
-    "skipLibCheck": true,  //生产环境的推荐选项，可大幅提升编译和类型检查速度
-    "incremental": true,   //TypeScript 的增量编译方案，能够显著加速后续的二次构建
-    "isolatedModules": true,  //此配置能强制每个文件都独立，很好地兼容 Vite 等现代工具的工作方式
+    "skipLibCheck": true, //生产环境的推荐选项，可大幅提升编译和类型检查速度
+    "incremental": true, //TypeScript 的增量编译方案，能够显著加速后续的二次构建
+    "isolatedModules": true, //此配置能强制每个文件都独立，很好地兼容 Vite 等现代工具的工作方式
 
     //特定于 Vue 和 Vite 的配置
-    "jsx": "preserve",   // Vue 负责处理 JSX
-    "noEmit": true,     // 类型检查，不输出 JS
-    "types": ["vite/client"],   //// 自动引入 import.meta.env 的类型
+    "jsx": "preserve", // Vue 负责处理 JSX
+    "noEmit": true, // 类型检查，不输出 JS
+    "types": ["vite/client"], //// 自动引入 import.meta.env 的类型
     "resolveJsonModule": true, //允许 TypeScript 直接导入 .json 文件，并对其进行类型检查。
-    "esModuleInterop": true,   //解决 CommonJS 模块与 ES Module 之间的默认导入兼容性问题。
-    "allowSyntheticDefaultImports": true,   //被 esModuleInterop 强制启用，允许默认导入的静态类型检查。
+    "esModuleInterop": true, //解决 CommonJS 模块与 ES Module 之间的默认导入兼容性问题。
+    "allowSyntheticDefaultImports": true, //被 esModuleInterop 强制启用，允许默认导入的静态类型检查。
 
     //路径别名
-    "baseUrl": ".",  //基础路径 默认根路径
+    "baseUrl": ".", //基础路径 默认根路径
     "paths": {
       "@/*": ["src/*"]
     }
   },
   //类型检查包含和不包含的文件
-  "include": ["src/**/*.ts","src/**/*.vue","src/**/*.tsx","src/**/*.d.ts","vue.config.ts","vitest.config.ts"],
-  "exclude": ["node_modules","dist"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "src/**/*.tsx",
+    "src/**/*.d.ts",
+    "vue.config.ts",
+    "vitest.config.ts",
+    "src/auto-imports.d.ts",
+    "src/components.d.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
 }

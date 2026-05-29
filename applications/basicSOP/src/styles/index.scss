@@ -1,0 +1,18 @@
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  /* 🌟 杀手锏：直接干掉最外层的原生滚动条 */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 顺手把全局的盒子模型都改成 border-box，防止 padding 撑破宽度 */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}

@@ -3,6 +3,7 @@ packages:
   - 'packages/*'
   - 'tools/*'
 allowBuilds:
+  '@parcel/watcher': set this to true or false
   esbuild: false
 minimumReleaseAgeExclude:
   - eslint-plugin-oxlint@1.67.0

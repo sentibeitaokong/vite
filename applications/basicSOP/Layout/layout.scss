@@ -1,0 +1,57 @@
+:root {
+  --sidebar-width: 210px;
+  --sidebar-hide-width: 54px; // 菜单折叠后的宽度
+  --navbar-height: 50px;
+  --theme-color: #409eff;
+}
+
+/* 侧边栏容器基础样式 */
+.sidebar-container {
+  transition: width 0.28s;
+  width: var(--sidebar-width) !important;
+  background-color: #304156;
+  height: 100%;
+  position: fixed;
+  font-size: 0px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1001;
+  overflow: hidden;
+}
+
+/* 右侧主干容器基础样式 */
+.main-container {
+  min-height: 100%;
+  transition: margin-left 0.28s;
+  margin-left: var(--sidebar-width);
+  position: relative;
+}
+
+/* 🌟 折叠状态下的覆盖样式 */
+.hideSidebar {
+  .sidebar-container {
+    width: var(--sidebar-hide-width) !important;
+  }
+  .main-container {
+    margin-left: var(--sidebar-hide-width);
+  }
+}
+
+/* 🌟 移动端响应式覆盖样式 */
+.mobile {
+  .main-container {
+    margin-left: 0px;
+  }
+  .sidebar-container {
+    transition: transform 0.28s;
+    width: var(--sidebar-width) !important;
+  }
+  &.hideSidebar {
+    .sidebar-container {
+      pointer-events: none;
+      transition-duration: 0.3s;
+      transform: translate3d(-var(--sidebar-width), 0, 0); // 隐藏到屏幕左侧之外
+    }
+  }
+}
