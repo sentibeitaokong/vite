@@ -46,9 +46,7 @@ import { useRouter } from 'vue-router'
 import { useAppStore } from '@/store/app'
 import { useUserStore } from '@/store/user'
 import Breadcrumb from './Breadcrumb.vue'
-
-// 确保你已经正确配置了 unplugin-auto-import，否则这里可能需要手动引入 ElMessage
-// import { ElMessage } from 'element-plus'
+import { resetRouter } from '@/router'
 
 const appStore = useAppStore()
 const router = useRouter()
@@ -63,10 +61,11 @@ const toggleSideBar = () => {
 const logout = async () => {
   localStorage.removeItem('ACCESS_TOKEN')
   const userStore = useUserStore()
-
+  //退出登录，清理本地缓存和 Store 状态
   await userStore.logout()
   await new Promise((resolve) => setTimeout(resolve, 800))
-
+  //重置路由表，擦除动态加载的路由
+  resetRouter()
   router.push(`/login?redirect=${router.currentRoute.value.fullPath}`)
   ElMessage.success('退出登录成功！')
 }

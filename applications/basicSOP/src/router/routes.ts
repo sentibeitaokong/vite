@@ -20,7 +20,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Layout',
-    component: () => import('../../Layout/index.vue'),
+    component: () => import('@/layout/index.vue'),
     redirect: '/dashboard',
     meta: {
       title: '主页', // 🌟 你想要显示的标题
