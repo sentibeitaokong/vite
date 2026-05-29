@@ -29,7 +29,7 @@
           <el-input
             v-model="loginForm.password"
             type="password"
-            placeholder="请输入密码 (如: 123456)"
+            placeholder="请输入密码 (如: 111111)"
             size="large"
             :prefix-icon="Lock"
             show-password
