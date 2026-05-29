@@ -29,9 +29,8 @@
     "allowSyntheticDefaultImports": true, //被 esModuleInterop 强制启用，允许默认导入的静态类型检查。
 
     //路径别名
-    "baseUrl": ".", //基础路径 默认根路径
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   //类型检查包含和不包含的文件
