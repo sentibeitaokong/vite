@@ -61,6 +61,15 @@ export default defineConfig({
               name: 'vue-vendor',
               test: /[\\/]node_modules[\\/](vue|vue-router|pinia)[\\/]/,
               entriesAware: true // 启用入口感知合并
+            },
+            {
+              name: 'element-plus',
+              test: /[\\/]node_modules[\\/]element-plus[\\/]/,
+              entriesAware: true // 启用入口感知合并
+            },
+            {
+              name: 'vendors',
+              test: /[\\/]node_modules[\\/]/
             }
           ]
         }
