@@ -54,6 +54,7 @@ watch(
 const closeSelectedTag = async (view: RouteLocationNormalizedLoaded) => {
   const { visitedViews } = await tagsViewStore.delView(view)
   if (isActive(view)) {
+    console.log(view)
     toLastView(visitedViews, view)
   }
 }
