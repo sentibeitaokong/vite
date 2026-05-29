@@ -1,0 +1,34 @@
+name: Deploy Project A to GitHub Pages
+
+on:
+  push:
+    branches: [ main ] # 或者是 master
+    # 🌟 优化：只有当 project-A 文件夹内的代码发生改动时，才触发自动部署
+    paths:
+      - 'basicSOP/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js ⚙️
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install and Build 🔧
+        # 🌟 核心 1：告诉机器人在执行 npm 命令前，先进入你要部署的项目目录
+        working-directory: ./applications/basicSOP
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 🌟 核心 2：告诉机器人，打包好的 dist 文件在这个子目录里
+          publish_dir: ./applications/basicSOP/dist
