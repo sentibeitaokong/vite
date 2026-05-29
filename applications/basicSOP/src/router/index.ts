@@ -14,7 +14,7 @@ const router = createRouter({
 const whiteList = ['/login', '404']
 
 //全局路由前置守卫
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, _from, next) => {
   const userStore = useUserStore()
   const hasToken = userStore.token
   if (hasToken) {

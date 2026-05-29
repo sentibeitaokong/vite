@@ -51,7 +51,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
           {
             path: 'user',
             name: 'UserManage',
-            component: () => import('@/views/system/User/User.vue'),
+            component: () => import('@/views/System/User/User.vue'),
             meta: {
               title: '用户管理',
               icon: 'User',
@@ -62,7 +62,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
             path: 'role',
             name: 'RoleManage',
             // 假设你后续会创建这个页面
-            component: () => import('@/views/system/Role/Role.vue'),
+            component: () => import('@/views/System/Role/Role.vue'),
             meta: {
               title: '角色管理',
               icon: 'Key',
