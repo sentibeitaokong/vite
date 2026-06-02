@@ -5,7 +5,9 @@
 </template>
 
 <script setup lang="ts">
-console.log('hello demo')
+let a=;
+console.log('hello v2')
+console.error('hello error')
 </script>
 
 <style scoped>
