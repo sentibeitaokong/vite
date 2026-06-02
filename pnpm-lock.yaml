@@ -124,7 +124,7 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2(typescript@6.0.3)
 
-  applications/vite7demo:
+  applications/vite8demo:
     dependencies:
       '@langchain/core':
         specifier: ^1.1.48
