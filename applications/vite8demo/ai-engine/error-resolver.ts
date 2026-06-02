@@ -24,8 +24,13 @@ export const handleResolver=async (error:Error)=>{
     for await (const chunk of stream) {
         // chunk.content 包含了本次生成的字符片段
         // 使用 process.stdout.write 在同一行连续输出
-        if (chunk.content) {
+        // 添加 typeof 检查，收窄类型为 string
+        if (chunk.content && typeof chunk.content === "string") {
             process.stdout.write(chunk.content);
+        }
+        // 如果是复杂的数组形式（在纯文本对话中极其罕见，通常可忽略或转 JSON）
+        else if (Array.isArray(chunk.content)) {
+            process.stdout.write(JSON.stringify(chunk.content));
         }
     }
     // 4. 整个流接收完毕后，打一个换行符收尾，保持终端整洁

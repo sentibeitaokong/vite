@@ -10,7 +10,7 @@ const pluginHtml=()=>{
     const options={
         name:'plugin-html',
         //tranform钩子函数
-        transform(code){
+        transform(code:string){
             return code.replace(/:vite8/g,"world")
         }
     }
