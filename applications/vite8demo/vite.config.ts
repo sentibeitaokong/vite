@@ -20,8 +20,10 @@ export default defineConfig({
     plugins: [
         vue(),
         // removeConsolePlugin(),
-        vitePluginAIDoctor()
-    ],
+        // 只有在非 CI 环境下（即本地开发时）才挂载这个 AI 医生插件
+        // GitHub Actions 默认会注入 process.env.CI = 'true'
+        !process.env.CI && vitePluginAIDoctor()
+    ].filter(Boolean), // 过滤掉 false 值
     server:{
         port:8080           //端口
     },

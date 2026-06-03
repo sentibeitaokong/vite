@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-let a=
-let b=c
+let a=1
+let b=2
 console.log('hello v2')
 console.error('hello error')
 </script>
