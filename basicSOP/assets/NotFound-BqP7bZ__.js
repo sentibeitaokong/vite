@@ -1,0 +1,1 @@
+import{I as e,m as t}from"./vue-vendor~index~index~Role~User~Dashboard~NotFound~Login-Cboiv34L.js";import{t as n}from"./_plugin-vue_export-helper-0vLWKQyu.js";var r={};function i(n,r){return e(),t(`div`,null,` NotFound `)}var a=n(r,[[`render`,i]]);export{a as default};
