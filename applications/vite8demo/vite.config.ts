@@ -24,6 +24,7 @@ export default defineConfig({
         // GitHub Actions 默认会注入 process.env.CI = 'true'
         !process.env.CI && vitePluginAIDoctor()
     ].filter(Boolean), // 过滤掉 false 值
+    base:'/vite/vite8demo/',
     server:{
         port:8080           //端口
     },
