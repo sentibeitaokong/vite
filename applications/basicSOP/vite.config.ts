@@ -24,7 +24,7 @@ export default defineConfig({
       dts: resolve(__dirname, 'src/components.d.ts')
     })
   ],
-  base: '/vite/',
+  base: '/vite/basicSOP/',
   resolve: {
     alias: {
       //设置@指向‘src'目录

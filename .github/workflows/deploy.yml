@@ -1,34 +1,64 @@
-name: Deploy Project A to GitHub Pages
+name: Deploy Monorepo via pnpm & Turbo
 
 on:
   push:
-    branches: [ main ] # 或者是 master
-    # 🌟 优化：只有当 project-A 文件夹内的代码发生改动时，才触发自动部署
-    paths:
-      - 'applications/basicSOP/**'
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
+      # 1. 专门为 pnpm 配置环境
+      - name: Setup pnpm ⚙️
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9 # 使用最新的 pnpm v9
+
+      # 2. 配置 Node 环境并关联 pnpm 缓存
       - name: Setup Node.js ⚙️
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'pnpm'
 
-      - name: Install and Build 🔧
-        # 🌟 核心 1：告诉机器人在执行 npm 命令前，先进入你要部署的项目目录
-        working-directory: ./applications/basicSOP
+      # 3. 引入 Turborepo 缓存
+      - name: Cache turbo build setup
+        uses: dtinth/setup-github-actions-caching-for-turbo@v1
+
+      # 4. 使用 pnpm 安装依赖
+      - name: Install Dependencies 🔧
+        run: pnpm install
+
+      # 5. Turborepo 全局构建
+      - name: Build with Turborepo 🚀
+        run: pnpm run build
+
+      # 6. 智能聚合：只提取带有 .deploy 标记的产物
+      - name: Prepare Deployment Directory 📂
         run: |
-          npm install
-          npm run build
+          mkdir -p .gh-pages-root
+          
+          for app in applications/*; do
+            # 核心逻辑：必须同时存在 dist 文件夹 和 .deploy 文件
+            if [ -d "$app/dist" ] && [ -f "$app/.deploy" ]; then
+              app_name=$(basename "$app")
+              echo "✅ 发现 .deploy 标记，准备发布: $app_name"
+          
+              mkdir -p ".gh-pages-root/$app_name"
+              cp -r "$app/dist/." ".gh-pages-root/$app_name/"
+            else
+              echo "⏭️ 未找到 .deploy 标记或无产物，跳过发布: $app"
+            fi
+          done
 
+      # 7. 推送至 gh-pages
       - name: Deploy to GitHub Pages 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # 🌟 核心 2：告诉机器人，打包好的 dist 文件在这个子目录里
-          publish_dir: ./applications/basicSOP/dist
+          publish_dir: ./.gh-pages-root

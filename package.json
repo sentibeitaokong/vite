@@ -4,7 +4,8 @@
   "description": "vite测试",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -27,6 +28,7 @@
     "@commitlint/config-conventional": "^21.0.1",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.5",
+    "turbo": "^2.9.16",
     "vite": "8.0.10"
   },
   "pnpm": {

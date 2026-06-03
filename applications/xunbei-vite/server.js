@@ -11,7 +11,7 @@ app.get('/*.css',async (req,res)=>{
     //同步方式读文件
     const file=fs.readFileSync(__dirname+'/src'+path,'utf-8');
     res.type('css')
-    res.end(file)
+    res.end(transformResult)
 })
 
 app.get('/*.ts',async (req,res)=>{
