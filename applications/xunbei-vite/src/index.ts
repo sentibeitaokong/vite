@@ -1,4 +1,4 @@
-// import './index.css'
+import './index.css'
 import {add} from "./add.ts";
 
 type User={
